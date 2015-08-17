@@ -1,0 +1,42 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/google-apis/google-apis.html">
+<link rel="import" href="blog-detail.html">
+
+<dom-module id="blog-list">
+  <style></style>
+  <template>
+    <template is="dom-repeat" items="{{posts}}">
+      <h1>{{item.title}}</h1>
+    </template>
+    <google-client-loader id="blogger"
+      name="blogger"
+      version="v3"></google-client-loader>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'blog-list',
+    attached: function() {
+      this.loadBlog();
+    },
+    posts: [],
+    loadBlog: function() {
+      var self = this;
+      var blogger = this.$['blogger'];
+      blogger.addEventListener('google-api-load', function(event) {
+          gapi.client.setApiKey('AIzaSyD1K7MyI_S92r389HnMGx4slcoJeCwf4a4');
+
+          var request = blogger.api.posts.list({
+            blogId: '4128799746500445888'
+          });
+
+          request.execute(function(res) {
+            if (res.items) {
+              console.log(res.items)
+              self.posts = res.items;
+            }
+          });
+      });
+    }
+  });
+</script>
