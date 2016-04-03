@@ -11,25 +11,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script src="../../bower_components/page/page.js"></script>
 <script>
   window.addEventListener('WebComponentsReady', function() {
-
+    
+    
+    // Removes end / from app.baseUrl which page.base requires for production
+    if (window.location.port === '') {  // if production
+      page.base(app.baseUrl.replace(/\/$/, ''));
+    }
+    
+    // Middleware
+    function scrollToTop(ctx, next) {
+      app.scrollPageToTop();
+      next();
+    }
+    
+    function setFocus(selected){
+      Polymer.dom(document)
+        .querySelector('section[data-route="' + selected + '"] .focus-target')
+        .focus();
+    }
+    
     // We use Page.js for routing. This is a Micro
     // client-side router inspired by the Express router
     // More info: https://visionmedia.github.io/page.js/
+    page('*', scrollToTop, function(ctx, next) {
+      next();
+    });
+    
     page('/', function () {
       app.route = 'home';
+      setFocus(app.route);
     });
-
-    page('/users', function () {
-      app.route = 'users';
+    
+    page(app.baseUrl, function() {
+      app.route = 'home';
+      setFocus(app.route);
     });
-
-    page('/users/:name', function (data) {
-      app.route = 'user-info';
-      app.params = data.params;
-    });
-
-    page('/contact', function () {
-      app.route = 'contact';
+    
+    page('/about', function() {
+      app.route = 'about';
+      setFocus(app.route);
     });
 
     // add #! before urls

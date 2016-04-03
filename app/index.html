@@ -60,26 +60,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 
 <body unresolved class="fullbleed layout vertical">
-    <span id="browser-sync-binding"></span>
+    <!-- build:remove -->
+        <span id="browser-sync-binding"></span>
+    <!-- endbuild -->
     <template is="dom-bind" id="app">
 
         <!-- Main Area -->
-        <paper-scroll-header-panel main condenses keep-condensed-header>
+        <paper-scroll-header-panel id="headerPanelMain" main condenses keep-condensed-header>
 
             <!-- Main Toolbar -->
             <paper-toolbar id="mainToolbar" class="tall">
-                <div class="top top-container">
-                    <div class="paper-font-headline">Roberto Rodriguez</div>
+                <div class="middle middle-container">
+                    <div class="app-name">Roberto Rodriguez</div>
                 </div>
-                <div class="middle title">
+                 <span class="space"></span>
+                <div class="bottom bottom-container">
                     <span class="paper-font-subhead">developer, aspiring chef, former beastlord</span>
                 </div>
+                <div class="top top-container">
                 <paper-button>
-                    <a href="#" class="bottom anchor-reset underline-mimic fade-border paper-font-title">About</a>
+                    <a data-route="about" href="{{baseUrl}}about" class="bottom anchor-reset underline-mimic fade-border paper-font-subhead">About</a>
                 </paper-button>
                 <paper-button>
-                    <a href="#" class="bottom anchor-reset underline-mimic fade-border paper-font-title">Blog</a>
+                    <a data-route="home" href="{{baseUrl}}" class="bottom anchor-reset underline-mimic fade-border paper-font-subhead">Blog</a>
                 </paper-button>
+                </div>
             </paper-toolbar>
 
             <!-- Main Content -->
@@ -87,29 +92,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
                     <section data-route="home">
-                        <blog-list></blog-list>
+                        <blog-list class="focus-target"></blog-list>
+                    </section>
+                    
+                    <section data-route="about">
+                        <h2 class="focus-target">Fuck face</h2>
                     </section>
                 </iron-pages>
             </div>
         </paper-scroll-header-panel>
         </paper-drawer-panel>
-
-        <!-- Uncomment next block to enable Service Worker support (1/2) -->
-        <!--
-    <paper-toast id="caching-complete"
-                 duration="6000"
-                 text="Caching complete! This app will work offline.">
-    </paper-toast>
-
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="fastest"
-                         cache-config-file="cache-config.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-    -->
     </template>
 </body>
 
