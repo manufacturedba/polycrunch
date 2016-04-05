@@ -22,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    for further information on custom CSS properties.
    */
     /* Application theme */
-    
+
     :root {
         --dark-primary-color: #303F9F;
         --default-primary-color: #02535e;
@@ -44,39 +44,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --paper-menu-background-color: #fff;
         --menu-link-color: #111111;
     }
-    
+
     body {
         @apply(--layout-fullbleed);
         @apply(--layout-vertical);
     }
-    
+
     .space {
         @apply(--layout-flex);
     }
-    
+
     .anchor-reset {
+      background-color: none;
       text-decoration: initial;
       color: inherit;
     }
-  
+
     .underline-mimic:hover {
       border-bottom: 3px solid #eee;
     }
-  
+
     #drawerToolbar {
         color: var(--secondary-text-color);
         background-color: var(--drawer-menu-color);
         border-bottom: var(--drawer-toolbar-border-color);
     }
-    
+
     #drawerToolbar .menu-name {
         @apply(--paper-font-title);
     }
-    
+
     paper-scroll-header-panel {
         height: 100%;
     }
-    
+
+    paper-button.accent {
+      background-color: var(--light-primary-color);
+    }
+
     paper-menu {
         --paper-menu-selected-item: {
             color: var(--primary-color);
@@ -85,12 +90,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             background: var(--primary-color);
         }
     }
-    
+
     paper-menu iron-icon {
         margin-right: 33px;
         opacity: 0.54;
     }
-    
+
     paper-menu a {
         @apply(--layout-horizontal);
         @apply(--layout-center);
@@ -105,20 +110,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         min-height: 48px;
         padding: 0 16px;
     }
-    
+
     #mainToolbar {
         background-color: var(--default-primary-color);
     }
-    
+
     #mainToolbar #topBar {
         z-index: 1000;
     }
-    
+
     #mainToolbar paper-button {
         margin-left: 5px;
         margin-right: 5px;
     }
-    
+
     #mainToolbar.tall .app-name {
         font-size: 40px;
         font-weight: 300;
@@ -126,24 +131,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         -webkit-transform-origin: left center;
         transform-origin: left center;
     }
-    
+
     #mainToolbar .top-container,
     #mainToolbar .middle-container,
     #mainToolbar .bottom-container {
         @apply(--layout-horizontal);
         @apply(--layout-center);
     }
-    
+
     #mainToolbar .middle-container {
         height: 100%;
         margin-left: 48px;
     }
-    
+
     #mainToolbar:not(.tall) .middle-container {
         font-size: 18px;
         padding-bottom: 0;
     }
-    
+
     #mainToolbar .bottom-container {
         @apply(--paper-font-subhead);
         margin-left: 48px;
@@ -152,19 +157,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         transform-origin: left center;
     }
     /* Height of the scroll area */
-    
+
     .content {
-        height: 900px;
+        height: 400px;
     }
-    
+
     section[data-route="home"] paper-material {
         @apply(--paper-font-body2);
     }
-    
+
     section[data-route="home"] paper-material .subhead {
         @apply(--paper-font-subhead);
     }
-    
+
     paper-material {
         border-radius: 2px;
         height: 100%;
@@ -173,18 +178,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 16px auto;
         background: white;
     }
-    
+
     #toast .toast-hide-button {
         color: #eeff41;
         margin: 10px;
     }
-    
+
     section[tabindex="-1"]:focus {
         outline: none;
     }
     /* Breakpoints */
     /* Small */
-    
+
     @media (max-width: 600px) {
         #drawer .paper-toolbar {
             margin-left: 16px;
@@ -201,10 +206,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
     }
     /* Tablet+ */
-    
+
     @media (min-width: 601px) {
         #drawer.paper-drawer-panel > [drawer] {
             border-right: 1px solid rgba(0, 0, 0, 0.14);
+        }
+        .barcart {
+            padding: 48px 62px;
         }
         iron-pages {
             padding: 48px 62px;
@@ -224,51 +232,51 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     http://www.google.com/design/spec/layout/adaptive-ui.html#adaptive-ui-breakpoints
    */
     /* mobile-small */
-    
+
     @media all and (min-width: 0) and (max-width: 360px) and (orientation: portrait) {}
     /* mobile-large */
-    
+
     @media all and (min-width: 361px) and (orientation: portrait) {}
     /* mobile-small-landscape */
-    
+
     @media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
     /* mobile-large-landscape */
-    
+
     @media all and (min-width: 481px) and (orientation: landscape) {}
     /* tablet-small-landscape */
-    
+
     @media all and (min-width: 600px) and (max-width: 960px) and (orientation: landscape) {}
     /* tablet-large-landscape */
-    
+
     @media all and (min-width: 961px) and (orientation: landscape) {}
     /* tablet-small */
-    
+
     @media all and (min-width: 600px) and (orientation: portrait) {}
     /* tablet-large */
-    
+
     @media all and (min-width: 601px) and (max-width: 840px) and (orientation: portrait) {}
     /* desktop-x-small-landscape */
-    
+
     @media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
     /* desktop-x-small */
-    
+
     @media all and (min-width: 0) and (max-width: 480px) and (max-aspect-ratio: 4/3) {}
     /* desktop-small-landscape */
-    
+
     @media all and (min-width: 481px) and (max-width: 840px) and (orientation: landscape) {}
     /* desktop-small */
-    
+
     @media all and (min-width: 481px) and (max-width: 840px) and (max-aspect-ratio: 4/3) {}
     /* desktop-medium-landscape */
-    
+
     @media all and (min-width: 841px) and (max-width: 1280px) and (orientation: landscape) {}
     /* desktop-medium */
-    
+
     @media all and (min-width: 841px) and (max-width: 1280px) and (max-aspect-ratio: 4/3) {}
     /* desktop-large */
-    
+
     @media all and (min-width: 1281px) and (max-width: 1600px) {}
     /* desktop-xlarge */
-    
+
     @media all and (min-width: 1601px) and (max-width: 1920px) {}
 </style>
