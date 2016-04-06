@@ -269,7 +269,8 @@ gulp.task('server', ['default'], function() {
   connect.server({
     root: 'dist',
     port: process.env.PORT || 5000, // localhost:5000
-    livereload: false
+    livereload: false,
+    fallback: 'dist/index.html'
   });
 });
 
