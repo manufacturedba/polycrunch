@@ -22,8 +22,8 @@
     posts: [],
     loadBlog: function() {
       var self = this;
-      var blogger = this.$['blogger'];
-      blogger.addEventListener('google-api-load', function(event) {
+      var blogger = this.$.blogger;
+      blogger.addEventListener('google-api-load', function() {
           gapi.client.setApiKey('AIzaSyD1K7MyI_S92r389HnMGx4slcoJeCwf4a4');
 
           var request = blogger.api.posts.list({
@@ -32,7 +32,7 @@
 
           request.execute(function(res) {
             if (res.items) {
-              console.log(res.items)
+              console.log(res.items);
               self.posts = res.items;
             }
           });

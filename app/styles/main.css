@@ -13,8 +13,34 @@ body {
 }
 
 div#topBar {
+  box-sizing: border-box;
   border-top: 10px solid #333;
   z-index: 999;
+}
+
+#barcart {
+  box-sizing: border-box;
+  flex-basis: 400px;
+  text-align: center;
+}
+
+#profile-picture img {
+  height: 150px;
+  width: 150px;
+  filter: grayscale(50%);
+  border-radius: 50%;
+}
+
+#eyeron-payjess {
+  max-width: 700px;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-basis: 50%;
+}
+
+.stunt {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .full-width {

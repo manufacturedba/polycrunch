@@ -17,7 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   // Base URL
   app.baseUrl = '/';
-
+  
+  app.profileLink = 'https://www.googleapis.com/plus/v1/people/+RobertoRodriguezM?fields=image&key=AIzaSyBu8AFbZ955rrD4JkxLpMBdXOCyw2zpvZ8&sz=150';
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {

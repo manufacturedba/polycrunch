@@ -9,7 +9,8 @@
     "page": "visionmedia/page.js#~1.6.4",
     "google-apis": "~1.0.3",
     "polymer": "Polymer/polymer#^1.2.0",
-    "paper-button": "PolymerElements/paper-button#^1.0.11"
+    "paper-button": "PolymerElements/paper-button#^1.0.11",
+    "axios": "^0.9.1"
   },
   "devDependencies": {
     "web-component-tester": "*",

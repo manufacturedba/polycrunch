@@ -41,25 +41,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Tile icon for Win8 (144x144) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- build:css /styles/main.css -->
+    <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild-->
 
-    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- build:js /bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <!-- endbuild -->
 
-    <!-- will be replaced with elements/elements.vulcanized.html -->
-    <link rel="import" href="elements/elements.html">
+    <!-- will be replaced with /elements/elements.vulcanized.html -->
+    <link rel="import" href="/elements/elements.html">
     <!-- endreplace-->
-
-    <!-- build:js scripts/app.js -->
-    <script src="scripts/app.js" defer></script>
-    <!-- endbuild-->
+    
+    <!-- build:js /bower_components/axios/dist/axios.min.js -->
+      <script src="/bower_components/axios/dist/axios.js"></script>
+    <!-- endbuild -->
 </head>
 
-<body unresolved class="fullbleed layout vertical">
+<body unresolved class="fullbleed layout vertical paper-font-body1">
     <!-- build:remove -->
         <span id="browser-sync-binding"></span>
     <!-- endbuild -->
@@ -78,27 +80,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <span class="paper-font-subhead">developer, aspiring chef, former beastlord</span>
                 </div>
                 <div class="top top-container">
-                <paper-button>
-                  <a data-route="home" href="{{baseUrl}}" class="bottom anchor-reset underline-mimic fade-border paper-font-subhead">Blog</a>
-                </paper-button>
-                <paper-button>
-                    <a data-route="about" href="{{baseUrl}}about" class="bottom anchor-reset underline-mimic fade-border paper-font-subhead">About</a>
-                </paper-button>
+                <a data-route="home" href="{{baseUrl}}" class="bottom anchor-reset paper-font-subhead">
+                    <paper-button class="underline-mimic fade-border">Blog</paper-button>
+                </a>
+                <a data-route="about" href="{{baseUrl}}about" class="bottom anchor-reset paper-font-subhead">
+                    <paper-button class="underline-mimic fade-border">About</paper-button>
+                </a>
                 </div>
             </paper-toolbar>
 
             <!-- Main Content -->
-            <div class="content layout horizontal">
-                <div class="flex-1 barcart">
-                  Hello
+            <div class="content layout horizontal start wrap">
+                <div id="barcart" class="flex-auto stunt">
+                  <div id="profile-picture"></div>
+                  <script type="text/javascript">
+                      axios.get(document.querySelector('#app').profileLink)
+                      .then(function _parseUrl(res){
+                        // WHEE!
+                        var parser = document.createElement('a');
+                        parser.href = res.data.image.url;
+                        parser.search = '?sz=300';
+                        return parser.href;
+                      })
+                      .then(function(link){
+                        var imgEl = document.createElement('img');
+                        imgEl.src = link;
+                        document.querySelector('#profile-picture')
+                          .appendChild(imgEl);
+                      });
+                  </script>
+                  <div id="link-list">
+                    <a href="https://goo.gl/rl8u7u" class="anchor-reset">
+                      <i class="fa fa-2x fa-lg fa-github"></i>
+                    </a>
+                    <a href="https://goo.gl/WJO0Ld" class="anchor-reset">
+                      <i class="fa fa-2x fa-instagram"></i>
+                    </a>
+                    <a href="https://goo.gl/7TrQPU" class="anchor-reset">
+                      <i class="fa fa-2x fa-twitter"></i>
+                    </a>
+                  </div>
                 </div>
-                <iron-pages attr-for-selected="data-route" selected="{{route}}">
+                <iron-pages id="eyeron-payjess" class="stunt flex-3" attr-for-selected="data-route" selected="{{route}}">
                     <section data-route="home">
                         <blog-list class="focus-target"></blog-list>
                     </section>
 
                     <section data-route="about">
-                        <h2 class="focus-target">Hiya!</h2>
+                        <h2 class="focus-target">HELLO!</h2>
                         <p>At 19 years old I dropped out of college with the idea
                         I was going to open a café with absolutely no money or
                         experience.  Before I convinced myself that I had a good idea,
@@ -122,6 +151,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-scroll-header-panel>
         </paper-drawer-panel>
     </template>
+    <!-- build:js scripts/app.js -->
+      <script src="/scripts/app.js"></script>
+    <!-- endbuild-->
 </body>
 
 </html>

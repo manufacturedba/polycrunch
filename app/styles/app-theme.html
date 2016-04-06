@@ -120,11 +120,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     #mainToolbar paper-button {
-        margin-left: 5px;
-        margin-right: 5px;
+        margin-left: 2px;
+        margin-right: 2px;
     }
 
     #mainToolbar.tall .app-name {
+        height: 5px;
         font-size: 40px;
         font-weight: 300;
         /* Required for main area's paper-scroll-header-panel custom condensing transformation */
@@ -141,7 +142,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     #mainToolbar .middle-container {
         height: 100%;
-        margin-left: 48px;
+        margin-left: 36px;
     }
 
     #mainToolbar:not(.tall) .middle-container {
@@ -211,7 +212,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         #drawer.paper-drawer-panel > [drawer] {
             border-right: 1px solid rgba(0, 0, 0, 0.14);
         }
-        .barcart {
+        #barcart {
             padding: 48px 62px;
         }
         iron-pages {
@@ -224,6 +225,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             padding-right: 30px;
         }
     }
+    
+    @media (min-width: 841px) {
+      .paper-font-body1 {
+        font-size: 18px;
+      }
+      #barcart {
+          max-width: 500px;
+      }
+    }
+    
     /* Material Design Adaptive Breakpoints */
     /*
     Below you'll find CSS media queries based on the breakpoint guidance
