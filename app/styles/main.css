@@ -31,6 +31,11 @@ div#topBar {
   border-radius: 50%;
 }
 
+#link-list .fa {
+  margin-right: 0.25em;
+  margin-left: 0.25em;
+}
+
 #eyeron-payjess {
   max-width: 700px;
   padding-left: 10px;
