@@ -10,7 +10,8 @@
     "google-apis": "~1.0.3",
     "polymer": "Polymer/polymer#^1.2.0",
     "paper-button": "PolymerElements/paper-button#^1.0.11",
-    "axios": "^0.9.1"
+    "axios": "^0.9.1",
+    "lodash": "^3.7.0"
   },
   "devDependencies": {
     "web-component-tester": "*",

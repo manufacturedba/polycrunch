@@ -38,6 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
     
     page('/', function () {
+      document.querySelector('blog-list').show(true);
       app.route = 'home';
       setFocus(app.route);
     });
@@ -52,8 +53,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       setFocus(app.route);
     });
     
-    page('/blog/:post', function() {
-      app.route = 'about';
+    page('/blog/:post', function(ctx) {
+      document.querySelector('blog-list')
+        .show(false)
+        .selectBySlug(ctx.params.post);
+      app.route = 'home';
       setFocus(app.route);
     });
     

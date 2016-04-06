@@ -1,18 +1,34 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/google-apis/google-apis.html">
-<link rel="import" href="blog-detail.html">
+<link rel="import" href="./blog-detail.html">
 
 <dom-module id="blog-list">
-  <style></style>
+  <style>
+    :host a {
+      color: var(--default-primary-color, --dark-theme-text-color);
+      text-decoration: none;
+    }
+    
+    :host .title {
+      text-decoration: underline;
+    }
+  </style>
   <template>
+    <div id="list">
     <template is="dom-repeat" items="{{posts}}">
-      <h1>{{item.title}}</h1>
+      <div class="post-list">
+        <a class="aincore" on-tap="_setSelected" href="blog/{{item.slug}}">
+          <span class="title paper-font-title">{{item.title}}</span>
+          <span class="paper-font-code">{{item.published}}</span>
+        </a>
+      </div>
     </template>
+    </div>
+    <blog-detail id="detail" content="{{selected}}"></blog-detail>
     <google-client-loader id="blogger"
       name="blogger"
       version="v3"></google-client-loader>
   </template>
-</dom-module>
 <script>
   Polymer({
     is: 'blog-list',
@@ -32,11 +48,65 @@
 
           request.execute(function(res) {
             if (res.items) {
-              console.log(res.items);
-              self.posts = res.items;
+              console.debug(res.items);
+              var transformed = [];
+              res.items.forEach(function(item){
+                item.published = new Date(item.published).toLocaleDateString();
+                item.slug = self.slugify(item.title);
+                transformed.push(item);
+              });
+              self.posts = transformed;
+              self.loaded = true;
+              self.dispatchEvent(new Event('posts-loaded'));
+            } else {
+              self.posts = [{
+                title: "No Posts Yet!"
+              }]
             }
           });
       });
+    },
+    show: function(isList) {
+      var pl = this.$.list;
+      var bd = this.$.detail;
+      if (isList) {
+        pl.style.display = 'block';
+        bd.style.display = 'none';
+      } else {
+        pl.style.display = 'none';
+        bd.style.display = 'block';
+      }
+      
+      return this;
+    },
+    _setSelected: function(e) {
+       this.selected = e.model.get('item');
+    },
+    selectBySlug: function(slug) {
+      var self = this;
+      function _find() {
+        self.posts.forEach(function(post) {
+          if (post.slug === slug) {
+            self.selected = post;
+          }
+        });
+      }
+      
+      if (this.loaded) {
+        _find();
+      } else {
+        this.addEventListener('posts-loaded', _find);
+      }
+    },
+    // https://gist.github.com/mathewbyrne/1280286
+    slugify: function(text) {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
     }
   });
 </script>
+</dom-module>

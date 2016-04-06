@@ -3,14 +3,36 @@
 <dom-module id="blog-detail">
   <style></style>
   <template>
-    <h1>Hello</h1>
-  <template>
+    <h1>{{content.title}}</h1>
+    <html-echo html="{{content}}"></html-echo>
+  </template>
+  <script>
+    Polymer({
+      is: 'blog-detail',
+      properties: {
+        content: {
+          type: String
+        }
+      }
+    });
+  </script>
 </dom-module>
+
+<!-- Credit to durajiwo for this very dangerous element -->
+<dom-module id="html-echo">
+  <template></template>
 <script>
   Polymer({
-    is: 'blog-detail',
-    ready: function() {
-      console.log('ready');
+    is: 'html-echo',
+    properties: {
+      html: {
+        type: String,
+        observer: '_htmlChanged'
+      }
+    },
+    _htmlChanged: function(value) {
+      this.innerHTML = value;
     }
   });
 </script>
+</dom-module>

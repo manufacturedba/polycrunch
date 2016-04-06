@@ -12,6 +12,10 @@ body {
   color: #333;
 }
 
+blog-list {
+  text-align: center;
+}
+
 div#topBar {
   box-sizing: border-box;
   border-top: 10px solid #333;
