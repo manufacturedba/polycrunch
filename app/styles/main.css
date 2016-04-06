@@ -12,10 +12,6 @@ body {
   color: #333;
 }
 
-blog-list {
-  text-align: center;
-}
-
 div#topBar {
   box-sizing: border-box;
   border-top: 10px solid #333;
@@ -26,6 +22,7 @@ div#topBar {
   box-sizing: border-box;
   flex-basis: 400px;
   text-align: center;
+  padding: 48px 62px;
 }
 
 #profile-picture img {
@@ -33,6 +30,10 @@ div#topBar {
   width: 150px;
   filter: grayscale(50%);
   border-radius: 50%;
+}
+
+#blogert {
+  min-height: 300px;
 }
 
 #link-list .fa {

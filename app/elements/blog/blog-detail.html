@@ -3,8 +3,11 @@
 <dom-module id="blog-detail">
   <style></style>
   <template>
-    <h1>{{content.title}}</h1>
-    <html-echo html="{{content}}"></html-echo>
+    <div class="paper-font-display1">{{content.title}}</div>
+    <div class="paper-font-code">{{content.published}}</div>
+    <p>
+      <html-echo html="{{content.content}}"></html-echo>
+    </p>
   </template>
   <script>
     Polymer({
