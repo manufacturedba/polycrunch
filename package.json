@@ -36,7 +36,7 @@
   "scripts": {
     "test": "gulp test:local",
     "start": "node index.js",
-    "postinstall": "bower install && ./node_modules/gulp-cli/bin/gulp.js"
+    "postinstall": "bower install"
   },
   "engines": {
     "node": "4.4.2",
@@ -45,6 +45,7 @@
   "dependencies": {
     "bower": "^1.7.9",
     "gulp-cli": "^1.2.1",
+    "gulp-connect": "^3.2.2",
     "restify": "^4.0.4"
   }
 }

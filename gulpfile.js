@@ -23,6 +23,7 @@ var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
+var connect = require('gulp-connect');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -262,6 +263,14 @@ gulp.task('default', ['clean'], function (cb) {
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
     cb);
+});
+
+gulp.task('server', ['default'], function() {
+  connect.server({
+    root: 'dist',
+    port: process.env.PORT || 5000, // localhost:5000
+    livereload: false
+  });
 });
 
 // Load tasks for web-component-tester
