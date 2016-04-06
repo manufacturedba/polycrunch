@@ -39,9 +39,11 @@
     "postinstall": "bower install && gulp"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "4.4.2",
+    "npm": "3.8.5"
   },
   "dependencies": {
+    "bower": "^1.7.9",
     "restify": "^4.0.4"
   }
 }
