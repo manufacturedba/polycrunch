@@ -12,6 +12,10 @@ body {
   color: #333;
 }
 
+div {
+  box-sizing: border-box;
+}
+
 div#topBar {
   box-sizing: border-box;
   border-top: 10px solid #333;
@@ -36,13 +40,20 @@ div#topBar {
   min-height: 300px;
 }
 
+#blogert img {
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 #link-list .fa {
   margin-right: 0.25em;
   margin-left: 0.25em;
 }
 
 #eyeron-payjess {
-  max-width: 700px;
+  box-sizing: border-box;
+  max-width: 100%;
   padding-left: 10px;
   padding-right: 10px;
   flex-basis: 50%;
