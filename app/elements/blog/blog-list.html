@@ -12,13 +12,22 @@
     :host .title {
       text-decoration: underline;
     }
+    
+    :host span.force-wrap {
+      white-space: pre-line;
+    }
+    
+    :host .post-list {
+      margin-bottom: 5px;
+    }
+    
   </style>
   <template>
     <div id="list">
     <template is="dom-repeat" items="{{posts}}">
       <div class="post-list">
         <a class="aincore" on-tap="_setSelected" href="blog/{{item.slug}}">
-          <span class="title paper-font-title">{{item.title}}</span>
+          <span class="title paper-font-title force-wrap">{{item.title}}</span>
           <span class="paper-font-code">{{item.published}}</span>
         </a>
       </div>
