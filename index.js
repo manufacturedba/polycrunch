@@ -15,6 +15,15 @@ function serveIndex(req, res, done){
 server.get('/', serveIndex);
 server.get('/about', serveIndex);
 server.get('/blog/:blog', serveIndex);
+server.get('/resume.pdf', function(req, res, done) {
+  return fs.readFile('dist/images/resume.pdf', function(err, content) {
+    if (err) throw err;
+    res.setHeader('Content-type', 'application/pdf');
+    res.write(content);
+    res.end();
+    return done();
+  })
+});
 
 server.get(/.*/, restify.serveStatic({
   directory: __dirname + '/dist',
