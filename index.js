@@ -1,6 +1,7 @@
-var fs = require('fs');
-var restify = require('restify');
-var server = restify.createServer();
+const fs = require('fs');
+const path = require('path');
+const restify = require('restify');
+const server = restify.createServer();
 
 function serveIndex(req, res, done){
   fs.readFile('dist/index.html', 'utf8', function(err, html){
@@ -12,6 +13,15 @@ function serveIndex(req, res, done){
   });
 }
 
+function forceToSSL(req, res, done) {
+  if (!req.isSecure()) {
+    return res.redirect(301, 'https://' + path.join(req.headers.host + req.url), done);
+  }
+
+  return done();
+}
+
+server.use(forceToSSL);
 server.get('/', serveIndex);
 server.get('/about', serveIndex);
 server.get('/blog/:blog', serveIndex);
