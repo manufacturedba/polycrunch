@@ -1,7 +1,7 @@
-var fs = require('fs');
-var path = require('path');
-var restify = require('restify');
-var server = restify.createServer();
+const fs = require('fs');
+const path = require('path');
+const restify = require('restify');
+const server = restify.createServer();
 
 function serveIndex(req, res, done){
   fs.readFile('dist/index.html', 'utf8', function(err, html){
