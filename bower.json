@@ -1,5 +1,5 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "polycrunch",
   "private": true,
   "dependencies": {
     "iron-elements": "PolymerElements/iron-elements#^1.0.0",
@@ -13,9 +13,5 @@
     "axios": "^0.9.1",
     "lodash": "^3.7.0",
     "highlight": "https://github.com/isagalaev/highlight.js"
-  },
-  "devDependencies": {
-    "web-component-tester": "*",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0"
   }
 }
