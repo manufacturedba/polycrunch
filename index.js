@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var restify = require('restify');
 var server = restify.createServer();
 
@@ -12,6 +13,15 @@ function serveIndex(req, res, done){
   });
 }
 
+function forceToSSL(req, res, done) {
+  if (!req.isSecure()) {
+    return res.redirect(301, 'https://' + path.join(req.headers.host + req.url), done);
+  }
+
+  return done();
+}
+
+server.use(forceToSSL);
 server.get('/', serveIndex);
 server.get('/about', serveIndex);
 server.get('/blog/:blog', serveIndex);
