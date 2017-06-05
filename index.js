@@ -5,30 +5,21 @@ const server = express();
 
 const PORT = process.env.PORT || 8000;
 
-function serveIndex(req, res, done){
-  fs.readFile('dist/index.html', 'utf8', function(err, html){
-    if(err) throw err;
-    res.setHeader('Content-type', 'text/html');
-    res.write(html);
-    res.end();
-    return done();
-  });
-}
-
 function forceToSSL(req, res, done) {
 
   if (req.headers['x-forwarded-proto'] === 'https') {
     return done();
   }
 
-  return res.redirect(301, 'https://' + path.join(req.headers.host + req.url));
 }
 
 server.enable('trust proxy');
 server.use(forceToSSL);
-server.get('/', serveIndex);
-server.get('/about', serveIndex);
-server.get('/blog/:blog', serveIndex);
+
+server.get('/',  express.static('dist'));
+server.get('/about',  express.static('dist'));
+server.get('/blog/:blog',  express.static('dist'));
+
 server.get('/resume.pdf', function(req, res, done) {
   return fs.readFile('dist/images/resume.pdf', function(err, content) {
     if (err) throw err;
@@ -38,8 +29,6 @@ server.get('/resume.pdf', function(req, res, done) {
     return done();
   })
 });
-
-server.get('/', express.static('dist'));
 
 server.listen(PORT, function(){
   console.log('Listening at ' + PORT);
