@@ -11,14 +11,15 @@ function forceToSSL(req, res, done) {
     return done();
   }
 
+  return res.redirect(301, 'https://' + path.join(req.headers.host + req.url));
 }
 
 server.enable('trust proxy');
 server.use(forceToSSL);
 
-server.get('/',  express.static('dist'));
-server.get('/about',  express.static('dist'));
-server.get('/blog/:blog',  express.static('dist'));
+server.use('/',  express.static('dist'));
+server.use('/about',  express.static('dist'));
+server.use('/blog/:blog',  express.static('dist'));
 
 server.get('/resume.pdf', function(req, res, done) {
   return fs.readFile('dist/images/resume.pdf', function(err, content) {
