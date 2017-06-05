@@ -14,6 +14,7 @@ function serveIndex(req, res, done){
 }
 
 function forceToSSL(req, res, done) {
+  console.log('testing encryption ', req.connection.encrypted);
   if (!req.isSecure()) {
     return res.redirect(301, 'https://' + path.join(req.headers.host + req.url), done);
   }
