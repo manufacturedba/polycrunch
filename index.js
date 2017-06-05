@@ -16,8 +16,8 @@ function serveIndex(req, res, done){
 }
 
 function forceToSSL(req, res, done) {
-  
-  if (!req.secure) {
+
+  if (req.headers["x-forwarded-proto"] !== 'https' || !req.secure) {
     return res.redirect(301, 'https://' + path.join(req.headers.host + req.url), done);
   }
 
