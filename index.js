@@ -14,7 +14,8 @@ function serveIndex(req, res, done){
 }
 
 function forceToSSL(req, res, done) {
-  console.log(req.headers.host);
+  console.log(req.connection.domain);
+
   if (!req.socket.localPort) {
     return res.redirect(301, 'https://' + path.join(req.headers.host + req.url), done);
   }
