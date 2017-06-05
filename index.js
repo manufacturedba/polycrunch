@@ -21,16 +21,6 @@ server.use('/',  express.static('dist'));
 server.use('/about',  express.static('dist'));
 server.use('/blog/:blog',  express.static('dist'));
 
-server.get('/resume.pdf', function(req, res, done) {
-  return fs.readFile('dist/images/resume.pdf', function(err, content) {
-    if (err) throw err;
-    res.setHeader('Content-type', 'application/pdf');
-    res.write(content);
-    res.end();
-    return done();
-  })
-});
-
 server.listen(PORT, function(){
   console.log('Listening at ' + PORT);
 });
