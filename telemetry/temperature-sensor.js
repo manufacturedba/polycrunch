@@ -23,7 +23,7 @@ function onEvent(id, type, callback) {
 
 class TemperatureSensor {
   constructor(id) {
-    if (!!id) {
+    if (!id) {
       throw new Error('id required for TemperatureSensor');
     }
 
@@ -36,4 +36,4 @@ class TemperatureSensor {
   }
 }
 
-export default TemperatureSensor;
+module.exports = TemperatureSensor;
