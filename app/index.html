@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Tile icon for Win8 (144x144) -->
     <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- build:css /styles/main.css -->
@@ -56,11 +56,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- will be replaced with /elements/elements.vulcanized.html -->
     <link rel="import" href="/elements/elements.html">
     <!-- endreplace-->
-    
+
     <!-- build:js /bower_components/lodash/lodash.min.js -->
         <script src="/bower_components/lodash/lodash.js"></script>
     <!-- endbuild -->
-    
+
     <!-- build:js /bower_components/axios/dist/axios.min.js -->
       <script src="/bower_components/axios/dist/axios.js"></script>
     <!-- endbuild -->
@@ -125,6 +125,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <i class="fa fa-2x fa-twitter"></i>
                     </a>
                   </div>
+                  <div id="temperature"></div>
+                  <script type="text/javascript">
+                    var temperatureContainer = document.querySelector('#temperature');
+                    var primus = Primus.connect();
+
+                    primus.on('data', function(data) {
+                      temperatureContainer.innerText = data;
+                    });
+
+                    primus.on('error', function(error) {
+                      console.log(error);
+                    });
+                  </script>
                 </div>
                 <iron-pages id="eyeron-payjess" class="stunt flex-3" attr-for-selected="data-route" selected="{{route}}">
                     <section id="blogert" data-route="home">
@@ -159,6 +172,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- build:js /scripts/app.js -->
       <script src="/scripts/app.js"></script>
     <!-- endbuild-->
+    <script src="/primus/primus.js"></script>
 </body>
 
 </html>
