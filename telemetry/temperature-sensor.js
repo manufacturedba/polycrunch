@@ -23,10 +23,6 @@ function onEvent(id, type, callback) {
 
 class TemperatureSensor {
   constructor(id) {
-    if (!id) {
-      throw new Error('id required for TemperatureSensor');
-    }
-
     this._id = id;
   }
 
