@@ -23,7 +23,7 @@ function forceToSSL(req, res, done) {
 
 app.enable('trust proxy');
 app.use(bodyParser.json());
-server.use(forceToSSL);
+app.use(forceToSSL);
 
 app.use('/',  express.static('dist'));
 app.use('/about',  express.static('dist'));
