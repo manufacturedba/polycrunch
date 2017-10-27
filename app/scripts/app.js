@@ -17,12 +17,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   // Base URL
   app.baseUrl = '/';
-  
+
   app.profileLink = 'https://www.googleapis.com/plus/v1/people/+RobertoRodriguezM?fields=image&key=AIzaSyBu8AFbZ955rrD4JkxLpMBdXOCyw2zpvZ8&sz=150';
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
+    function loadFrights() {
+      var farg = document.createDocumentFragment();
+      var spookyContainer = document.querySelector('#spooky-container');
 
+      function addFright(spook) {
+        var spookyEl = document.createElement('spooky-time');
+        spookyEl.data = spook;
+        farg.appendChild(spookyEl);
+      }
+
+      app.spookyJson
+        .then(function(spooks) {
+          return spooks.forEach(addFright);
+        })
+        .then(function() {
+          spookyContainer.innerHTML = '';
+          spookyContainer.appendChild(farg);
+        });
+    }
+
+    document.addEventListener('iron-select', loadFrights);
   });
 
   // See https://github.com/Polymer/polymer/issues/1381
@@ -58,5 +78,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.scrollPageToTop = function() {
     app.$.headerPanelMain.scrollToTop(true);
   };
-  
+
+  app.spookyJson = fetch('/witches-brew')
+  .then(function(response) {
+    return response.json();
+  });
 })(document);
