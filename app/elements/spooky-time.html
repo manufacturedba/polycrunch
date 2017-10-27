@@ -1,0 +1,60 @@
+<dom-module id="spooky-time">
+  <style>
+    :host .spooky-time--link {
+      color: #808285;
+      text-decoration: none;
+    }
+
+    :host .spooky-time--link:hover {
+      color: #333;
+      text-decoration: none;
+    }
+
+    :host .spooky-time--zombie-line {
+      font-size: 1.2em;
+    }
+
+    :host .spooky-time--zombie-line span:nth-child(odd) {
+      color: #FF9100;
+    }
+  </style>
+  <template>
+    <h4>
+      <a class="spooky-time--link" href="[[data.source.link]]" target="_blank">[[data.source.name]]</a>
+    </h4>
+    <div class="spooky-time--audio-container">
+      <audio controls>
+        <source src="[[data.recording]]" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="spooky-time--zombie-line">
+      <template is="dom-repeat" items="{{zombieLine}}">
+        <span>[[item]]</span>
+      </template>
+    </div>
+  </template>
+  <script>
+   var halloweenies = ['🎃', '🦇', '🤡', '👿', '👹', '👺', '💀', '👻', '👽', '🤖', '👸', '🧙', '🧚', '🧛', '🧟'];
+    Polymer({
+      is: 'spooky-time',
+      properties: {
+        data: {
+          type: Object,
+        }
+      },
+
+      _getRandomSpooks(len) {
+        var spooks = [];
+        for (var i = 0; i < len; i++) {
+          var index = Math.floor(Math.random() * halloweenies.length);
+          spooks.push(halloweenies[index]);
+        }
+        return spooks;
+      },
+
+      ready: function() {
+        this.zombieLine = this._getRandomSpooks(30);
+      }
+    });
+  </script>
+</dom-module>

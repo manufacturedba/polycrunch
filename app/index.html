@@ -64,6 +64,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- build:js /bower_components/axios/dist/axios.min.js -->
       <script src="/bower_components/axios/dist/axios.js"></script>
     <!-- endbuild -->
+
+    <script type="javascript">
+      if (!window.fetch) {
+        var script = document.createElement('script');
+        script.src = '/bower_components/fetch/fetch.js';
+        document.head.appendChild(script);
+      }
+    </script>
 </head>
 
 <body unresolved class="fullbleed layout vertical paper-font-body1">
@@ -85,12 +93,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <span class="paper-font-subhead">developer, aspiring chef, former beastlord</span>
                 </div>
                 <div class="top top-container">
-                <a data-route="home" href="{{baseUrl}}" class="bottom anchor-reset paper-font-subhead">
-                    <paper-button class="underline-mimic fade-border">Blog</paper-button>
-                </a>
-                <a data-route="about" href="{{baseUrl}}about" class="bottom anchor-reset paper-font-subhead">
-                    <paper-button class="underline-mimic fade-border">About</paper-button>
-                </a>
+                  <a data-route="home" href="{{baseUrl}}" class="bottom anchor-reset paper-font-subhead">
+                      <paper-button class="underline-mimic fade-border">Blog</paper-button>
+                  </a>
+                  <a data-route="about" href="{{baseUrl}}about" class="bottom anchor-reset paper-font-subhead">
+                      <paper-button class="underline-mimic fade-border">About</paper-button>
+                  </a>
+
+                  <a data-route="spooky" href="{{baseUrl}}spooky" class="bottom anchor-reset paper-font-subhead">
+                      <paper-button class="underline-mimic fade-border">Spooky</paper-button>
+                  </a>
                 </div>
             </paper-toolbar>
 
@@ -145,25 +157,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </section>
 
                     <section data-route="about">
-                        <h2 class="focus-target">HELLO!</h2>
-                        <p>At 19 years old I dropped out of college with the idea
-                        I was going to open a café with absolutely no money or
-                        experience.  Before I convinced myself that I had a good idea,
-                        I started working on the website and instantly fell in love with the web.</p>
-                      <p>I've been a web developer for 4 years now and haven't looked back.</p>
-                      <p>I live/play/work in <b>Denver, Colorado</b> where you can find me either
-                        obsessing over cocktail recipes, rubbing cat bellies, or
-                        learning how to be an actual <paper-button class="accent paper-font-code" on-tap="fudge">#$%@</paper-button>ing programmer.</p>
+                        <h2 class="focus-target">HAPPY HALLOWEEN! 🎃</h2>
                     </section>
-                    <script type="text/javascript">
-                        (function(root) {
-                          document.querySelector('#app').fudge = function (e){
-                              root._wurd = root._wurd || e.srcElement.textContent;
-                              e.srcElement.textContent = (e.srcElement.textContent === root._wurd)
-                                ? 'fuck' : root._wurd;
-                          };
-                        })(window);
-                    </script>
+
+                    <section id="spooky-route" data-route="spooky">
+                        <div id="spooky-container" class="focus-target"></div>
+                    </section>
                 </iron-pages>
             </div>
         </paper-scroll-header-panel>
