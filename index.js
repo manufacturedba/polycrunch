@@ -25,10 +25,15 @@ app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(forceToSSL);
 
-app.use('/',  express.static('dist'));
-app.use('/about',  express.static('dist'));
-app.use('/blog/:blog',  express.static('dist'));
+const ROOT = '/';
+const APP_ROUTES = [ROOT, 'about', 'spooky', 'blog/:blog'];
+const STATIC_FOLDER = 'dist';
 
+function loadStaticAppRoutes() {
+  APP_ROUTES.forEach(route => app.use(path.join(ROOT, route), express.static(STATIC_FOLDER)));
+}
+
+loadStaticAppRoutes();
 app.post('/update-temperature', function(req, res, done) {
 
   if (req.body.token === TEMPERATURE_TOKEN) {
