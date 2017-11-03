@@ -12,7 +12,6 @@
     "paper-button": "PolymerElements/paper-button#^1.0.11",
     "axios": "^0.9.1",
     "lodash": "^3.7.0",
-    "highlight": "https://github.com/isagalaev/highlight.js",
-    "fetch": "^2.0.3"
+    "highlight": "https://github.com/isagalaev/highlight.js"
   }
 }
