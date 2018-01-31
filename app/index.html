@@ -65,9 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <script src="/bower_components/axios/dist/axios.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js /scripts/vlist.js -->
-      <script src="/scripts/vlist.js"></script>
-    <!-- endbuild -->
+    <link rel="prefetch" href="messages1.json">
 </head>
 
 <body unresolved class="fullbleed layout vertical paper-font-body1">
@@ -138,30 +136,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                         </ul>
                       </div>
+                      <paper-button class="accent paper-font-code" on-tap="moreLove">keep going!!</paper-button>
+
                     </section>
                     <script type="text/javascript">
-                      (function() {
-                        axios.get('messages.json')
-                        .then(function (response) {
-                          var messages = response.data;
-                          var chunks = '<ul class="hide" id="0">';
-                          var container = document.querySelector('#messages-ul');
-                          var house = document.createElement('div');
-                          container.innerHTML = '';
-                          for (var i = 0; i < messages.length; i++) {
-                            chunks += '<li>' + messages[i] + '</li>';
-                            if (i && i % 100 === 0) {
-                              house.innerHTML += chunks + '</ul>';
-                              chunks = '<ul class="hide" id=' + (i + 1);
+                      (function(root) {
+                        function getSON(id, clear) {
+                          return axios.get('love' + id + '.json')
+                          .then(function (response) {
+
+                            if (clear) {
+                              document.querySelector('#messages-ul').innerHTML = '';
                             }
-                          }
-                          house.innerHTML += chunks + '</ul>';
-                          container.appendChild(house);
-                        })
-                        .catch(function (error) {
-                          console.log(error);
-                        });
-                      })();
+
+                            var messages = response.data;
+                            var el = '<ul><li>' + messages.join('</li><li>') + '</li></ul>';
+                            document.querySelector('#messages-ul').innerHTML = el;
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
+                        }
+                        getSON(1, true);
+                        var track = 1;
+                        document.querySelector('#app').moreLove = function (e){
+                          track += 1;
+                          getSON(track);
+                        };
+                      })(window);
                     </script>
                 </iron-pages>
             </div>
