@@ -28,6 +28,7 @@ app.use(forceToSSL);
 app.use('/',  express.static('dist'));
 app.use('/about',  express.static('dist'));
 app.use('/blog/:blog',  express.static('dist'));
+app.use('/a-life-well-loved', express.static('dist'));
 
 app.post('/update-temperature', function(req, res, done) {
 
