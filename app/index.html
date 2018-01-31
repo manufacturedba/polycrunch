@@ -64,6 +64,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- build:js /bower_components/axios/dist/axios.min.js -->
       <script src="/bower_components/axios/dist/axios.js"></script>
     <!-- endbuild -->
+
+    <!-- build:js /scripts/vlist.js -->
+      <script src="/scripts/vlist.js"></script>
+    <!-- endbuild -->
 </head>
 
 <body unresolved class="fullbleed layout vertical paper-font-body1">
@@ -76,55 +80,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-scroll-header-panel id="headerPanelMain" main condenses keep-condensed-header>
 
             <!-- Main Toolbar -->
-            <paper-toolbar id="mainToolbar" class="tall">
+            <paper-toolbar id="mainToolbar">
                 <div class="middle middle-container">
-                    <div class="app-name">Roberto Rodriguez</div>
-                </div>
-                 <span class="space"></span>
-                <div class="bottom bottom-container">
-                    <span class="paper-font-subhead">developer, aspiring chef, former beastlord</span>
+                    <div class="app-name">A Life Well Loved</div>
                 </div>
                 <div class="top top-container">
-                <a data-route="home" href="{{baseUrl}}" class="bottom anchor-reset paper-font-subhead">
-                    <paper-button class="underline-mimic fade-border">Blog</paper-button>
-                </a>
-                <a data-route="about" href="{{baseUrl}}about" class="bottom anchor-reset paper-font-subhead">
-                    <paper-button class="underline-mimic fade-border">About</paper-button>
-                </a>
                 </div>
             </paper-toolbar>
 
             <!-- Main Content -->
             <div class="content layout horizontal wrap">
                 <div id="barcart" class="flex-auto stunt">
-                  <div id="profile-picture"></div>
-                  <script type="text/javascript">
-                      axios.get(document.querySelector('#app').profileLink)
-                      .then(function _parseUrl(res){
-                        // WHEE!
-                        var parser = document.createElement('a');
-                        parser.href = res.data.image.url;
-                        parser.search = '?sz=300';
-                        return parser.href;
-                      })
-                      .then(function(link){
-                        var imgEl = document.createElement('img');
-                        imgEl.src = link;
-                        document.querySelector('#profile-picture')
-                          .appendChild(imgEl);
-                      });
-                  </script>
-                  <div id="link-list">
-                    <a href="https://github.com/manufacturedba" class="anchor-reset flex-it">
-                      <i class="fa fa-2x fa-lg fa-github"></i>
-                    </a>
-                    <a href="https://www.instagram.com/manufacturedba" class="anchor-reset flex-it">
-                      <i class="fa fa-2x fa-instagram"></i>
-                    </a>
-                    <a href="https://twitter.com/manufacturedba" class="anchor-reset flex-it">
-                      <i class="fa fa-2x fa-twitter"></i>
-                    </a>
-                  </div>
                   <div id="temperature"></div>
                   <script type="text/javascript">
                     var temperatureContainer = document.querySelector('#temperature');
@@ -163,6 +129,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                 ? 'fuck' : root._wurd;
                           };
                         })(window);
+                    </script>
+
+                    <section data-route="a-life-well-loved">
+                      <div id="messages">
+                        <ul id="messages-ul">
+                          incoming!! <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+
+                        </ul>
+                      </div>
+                    </section>
+                    <script type="text/javascript">
+                      (function() {
+                        axios.get('messages.json')
+                        .then(function (response) {
+                          var messages = response.data;
+                          var chunks = '<ul class="hide" id="0">';
+                          var container = document.querySelector('#messages-ul');
+                          var house = document.createElement('div');
+                          container.innerHTML = '';
+                          for (var i = 0; i < messages.length; i++) {
+                            chunks += '<li>' + messages[i] + '</li>';
+                            if (i && i % 100 === 0) {
+                              house.innerHTML += chunks + '</ul>';
+                              chunks = '<ul class="hide" id=' + (i + 1);
+                            }
+                          }
+                          house.innerHTML += chunks + '</ul>';
+                          container.appendChild(house);
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                      })();
                     </script>
                 </iron-pages>
             </div>
