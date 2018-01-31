@@ -22,6 +22,34 @@ div#topBar {
   z-index: 999;
 }
 
+.hide {
+  display: none;
+}
+
+#messages {
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
+}
+
+#messages ul {
+  padding: 2px;
+  list-style: none;
+}
+
+#messages-ul > div {
+  height: 100vh !important;
+  width: 100% !important;
+  border: none !important;
+}
+
+#messages-ul img {
+  width: 100px;
+}
+
+#messages .emoji {
+  width: 15px;
+}
+
 #barcart {
   box-sizing: border-box;
   flex-basis: 400px;
